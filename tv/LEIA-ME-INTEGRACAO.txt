@@ -1,0 +1,85 @@
+HAIALA - INTEGRAÇÃO DOS PAINÉIS - V11
+
+ARQUITETURA CONSOLIDADA
+
+Endpoint principal:
+tv/api/ordens-centro.php
+
+PADRÃO LISTA:
+- FINALIZACAO01
+- FINALIZACAO02
+- FINALIZACAO03
+- PINTURAPO
+- PRETRATAMENTO
+
+Chamadas:
+api/ordens-centro.php?centro=FINALIZACAO01
+api/ordens-centro.php?centro=FINALIZACAO02
+api/ordens-centro.php?centro=FINALIZACAO03
+api/ordens-centro.php?centro=PINTURAPO
+api/ordens-centro.php?centro=PRETRATAMENTO
+
+JSON esperado pelos HTMLs de lista:
+{
+  "sucesso": true,
+  "layout": "lista",
+  "dados": [
+    {
+      "sequencia": 1,
+      "ordem": "...",
+      "produto": "...",
+      "quantidade": 0,
+      "programacao": "...",
+      "status": "..."
+    }
+  ],
+  "resumo": {
+    "qte_prod_dia": 0,
+    "qde_perda": 0,
+    "tp_disponivel": 480,
+    "tp_performance": 0
+  }
+}
+
+PADRÃO GRADE:
+- PREPARACAO
+
+Chamada:
+api/ordens-centro.php?centro=PREPARACAO
+
+JSON esperado:
+{
+  "sucesso": true,
+  "layout": "grade",
+  "dados": [
+    {
+      "sequencia": 1,
+      "m2": [
+        {
+          "codigo": "111",
+          "sku": "P VEN EXTRA 085X215 DIR REQ12",
+          "op": "95645",
+          "quantidade": 2,
+          "tp_kit": 2.5,
+          "tp_total": 5.0
+        }
+      ],
+      "m6": [],
+      "m1": [],
+      "m5": [],
+      "m3": []
+    }
+  ]
+}
+
+ALTERAÇÕES FUNCIONAIS:
+- preparação.html agora usa ordens-centro.php?centro=PREPARACAO.
+- Layout visual do preparação.html não foi alterado.
+- Nos HTMLs de lista foi removida uma chamada duplicada de atualização
+  dos indicadores, sem alteração visual.
+- preparacao-plano.php foi mantido somente como compatibilidade temporária.
+
+IMPORTANTE:
+As queries existentes são placeholders.
+A TI deve substituir somente os blocos SQL identificados no PHP,
+mantendo os aliases documentados.

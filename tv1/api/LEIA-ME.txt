@@ -1,0 +1,36 @@
+HAIALA - PAINÉIS DE PRODUÇÃO
+
+Estrutura:
+
+tv/
+├── index.html
+├── finalizacao01.html
+├── finalizacao02.html
+├── finalizacao03.html
+├── pinturapo.html
+├── preparação.html
+├── pretratamento.html
+└── api/
+    └── ordens-centro.php
+
+Instalação no XAMPP:
+Copiar a pasta tv para:
+
+C:\xampp\htdocs\tv\
+
+Acesso principal:
+http://localhost/tv/
+
+O index.html possui um dropdown com os Centros de Trabalho.
+Ao selecionar um centro, o navegador abre automaticamente o painel correspondente.
+
+Cada painel chama:
+api/ordens-centro.php?centro=CODIGO
+
+A query real do Sankhya/Oracle deverá ser inserida pela TI dentro de:
+tv\api\ordens-centro.php
+
+IMPORTANTE:
+- Não colocar credenciais Oracle nos HTMLs.
+- Usar OCI8 no PHP.
+- Preferir usuário Oracle somente leitura.

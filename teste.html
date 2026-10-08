@@ -1,0 +1,23 @@
+<?php
+header('Content-Type: text/plain; charset=utf-8');
+
+$usuario = 'teste';
+$senha = 'hai123';
+$conexao = 'jdbc:oracle:thin:@10.140.11.147:1521:snkdbprd';
+
+$conn = oci_connect(
+    $usuario,
+    $senha,
+    $conexao,
+    'AL32UTF8'
+);
+
+if (!$conn) {
+    $erro = oci_error();
+    echo "ERRO NA CONEXAO\n";
+    echo $erro['message'];
+    exit;
+}
+
+echo "CONEXAO ORACLE OK";
+oci_close($conn);
