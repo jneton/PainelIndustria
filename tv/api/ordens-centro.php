@@ -8,7 +8,7 @@ $centro = $_GET['centro'] ?? '';
  * Configure estes dados no servidor.
  * Nunca coloque usuário/senha do Oracle no HTML/JavaScript.
  */
-$oracle_user = 'teste';
+$oracle_user = 'sankhya';
 $oracle_pass = 'hai123';
 $oracle_dsn  = '//10.140.11.147:1521/snkdbprd';
 

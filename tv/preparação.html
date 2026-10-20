@@ -88,11 +88,11 @@ footer{height:7vh;min-height:52px;background:#111820;color:#fff;display:grid;gri
               <span class="col-main">SEQ.</span>
               <span class="col-sub">de Prod.</span>
             </th>
-            <th class="machine-col"><span class="col-main">M2</span><span class="col-sub">Nº OP</span></th>
-            <th class="machine-col"><span class="col-main">M6</span><span class="col-sub">Nº OP</span></th>
-            <th class="machine-col"><span class="col-main">M1</span><span class="col-sub">Nº OP</span></th>
-            <th class="machine-col"><span class="col-main">M5</span><span class="col-sub">Nº OP</span></th>
-            <th class="machine-col"><span class="col-main">M3</span><span class="col-sub">Nº OP</span></th>
+            <th class="machine-col"><span class="col-main">M2</span></th>
+            <th class="machine-col"><span class="col-main">M6</span></th>
+            <th class="machine-col"><span class="col-main">M1</span></th>
+            <th class="machine-col"><span class="col-main">M5</span></th>
+            <th class="machine-col"><span class="col-main">M3</span></th>
             
           </tr>
         </thead>
@@ -181,10 +181,10 @@ function montarLinhasVazias(){
 }
 
 function cardKit(item){
-  const codigo = item.codigo ?? '';
-  const sku = item.sku ?? '';
-  const op = item.op ?? '';
-  const quantidade = item.quantidade ?? '';
+  const codigo = item.Codprodpa ?? '';
+  const sku = item.DescProduto ?? '';
+  const op = item.OP ?? '';
+  const quantidade = item.QtdProduzir ?? '';
   const tpKit = item.tp_kit ?? '';
   const tpTotal = item.tp_total ?? '';
 
@@ -243,7 +243,7 @@ function carregarDemoVisual(){
 
 async function carregarPlano(){
   try {
-    const resp = await fetch('api/ordens-centro.php?centro=PREPARACAO', { cache: 'no-store' });
+    const resp = await fetch('api/preparacao-plano?centro=PREPARACAO', { cache: 'no-store' });
     if(!resp.ok) throw new Error(`HTTP ${resp.status}`);
     const json = await resp.json();
 
