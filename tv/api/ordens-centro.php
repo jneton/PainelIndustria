@@ -30,7 +30,7 @@ WITH processos AS
          iproc.dhinst,
          iproc.statusproc AS status
     FROM tpriproc iproc
-   WHERE iproc.dhinst >= trunc(add_months(SYSDATE, -2), 'MM')
+   WHERE iproc.dhinst >= trunc(add_months(SYSDATE, -1), 'MM')
      AND iproc.statusproc NOT IN ('C', 'C2', 'F', 'S', 'S2')),
 estoque_operacao AS
  (SELECT esr.idiproc,
@@ -84,7 +84,7 @@ dados_producao AS
    INNER JOIN tprefx efx ON efx.idefx = atv.idefx AND efx.idproc = atv.idproc
    INNER JOIN tpriatv iatv ON iatv.idiproc = p.idiproc AND iatv.idefx = efx.idefx
    INNER JOIN tprwcp wcp ON wcp.codwcp = iatv.codwcp
-   WHERE wcp.codwcp = 46),
+   WHERE wcp.codwcp = 11),
 resultado AS
  (SELECT dp.codwcp,
          dp.nome_wcp AS nome,

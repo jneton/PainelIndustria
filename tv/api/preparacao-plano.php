@@ -16,26 +16,41 @@ $oracle_pass = 'hai123';
 $oracle_dsn  = '//10.140.11.147:1521/snkdbprd';
 
 $sqlCentros = <<<'SQL'
-SELECT wcp.codwcp,
-       wcp.nome
-  FROM tprwcp wcp
- WHERE wcp.codcwc = 44
- ORDER BY wcp.codwcp
+SELECT p1_n,
+       p2_n,
+       p3_n,
+       p4_n,
+       p5_n
+  FROM (SELECT CASE
+                  WHEN wcp.codwcp = 33 THEN
+                   1
+                  WHEN wcp.codwcp = 32 THEN
+                   2
+                  WHEN wcp.codwcp = 31 THEN
+                   3
+                  WHEN wcp.codwcp = 29 THEN
+                   4
+                  WHEN wcp.codwcp = 28 THEN
+                   5
+               END AS ordem,
+               --wcp.codwcp,
+               wcp.nome
+          FROM tprwcp wcp
+         WHERE wcp.codwcp IN (33, 32, 31, 29, 28))
+pivot(MAX(nome) AS n
+   FOR ordem IN(1 AS p1, 2 AS p2, 3 AS p3, 4 AS p4, 5 AS p5))
 SQL;
 
 $stmtCentros = oci_parse($conn, $sqlCentros);
 
 if (!$stmtCentros || !oci_execute($stmtCentros)) {
     $e = oci_error($stmtCentros ?: $conn);
-
     http_response_code(500);
-
     echo json_encode([
         'sucesso' => false,
         'mensagem' => 'Erro ao consultar os centros de trabalho.',
         'detalhe' => $e['message'] ?? 'Erro OCI'
     ], JSON_UNESCAPED_UNICODE);
-
     oci_close($conn);
     exit;
 }
@@ -44,8 +59,11 @@ $centros = [];
 
 while ($row = oci_fetch_assoc($stmtCentros)) {
     $centros[] = [
-        'codwcp' => (int) $row['CODWCP'],
-        'nome'   => $row['NOME']
+        'p1' => (string) $row['P1_N'],
+        'p2' => (string) $row['P2_N'],
+        'p3' => (string) $row['P3_N'],
+        'p4' => (string) $row['P4_N'],
+        'p5' => (string) $row['P5_N']
     ];
 }
 
@@ -128,9 +146,9 @@ $seq = 1;
 while ($row = oci_fetch_assoc($stmt)) {
     $Sequencia = (float)($row['SEQUENCIA'] ?? 0);
     $CodWcp = (float)($row['CODWCP'] ?? 0);
-    $NomeCentro = (string)($row['NOME_CENTRO'] ?? $row['QTDPERDIDA'] ?? 0);
+    $NomeCentro = (string)($row['NOME_CENTRO'] ?? "");
     $OP = (float)($row['IDIPROC'] ?? 0);
     $Codprodpa = (float)($row['CODPRODPA'] ?? 0);
-    $DescProduto = (string)($row['DESCPRODUTO'] ?? 0);
+    $DescProduto = (string)($row['DESCPRODUTO'] ?? "");
     $QtdProduzir = (float)($row['QTDPRODUZIR'] ?? "");
 

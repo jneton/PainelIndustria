@@ -8,11 +8,13 @@ $centro = $_GET['centro'] ?? '';
  * Configure estes dados no servidor.
  * Nunca coloque usuário/senha do Oracle no HTML/JavaScript.
  */
-$oracle_user = 'teste';
+$oracle_user = 'sankhya';
 $oracle_pass = 'hai123';
 $oracle_dsn  = '//10.140.11.147:1521/snkdbprd';
 
-if ($centro !== 'FINALIZACAO01') {
+if ($centro !== 'FINALIZACAO01' 
+    && $centro !== 'FINALIZACAO02' 
+    && $centro !== 'FINALIZACAO03') {
     http_response_code(400);
     echo json_encode([
         'sucesso' => false,
@@ -25,10 +27,14 @@ $sql = <<<'SQL'
 WITH processos AS
  (SELECT iproc.idiproc,
          iproc.idproc,
-         iproc.dhinst
+         iproc.dhinst,
+         iproc.statusproc AS status
     FROM tpriproc iproc
-   WHERE iproc.dhinst >= trunc(add_months(SYSDATE, -1), 'MM')
-     AND iproc.statusproc NOT IN ('C', 'C2', 'F', 'S', 'S2')),
+	INNER JOIN tprprc prc
+	   ON iproc.idproc = prc.idproc
+   WHERE iproc.dhinst >= trunc(add_months(SYSDATE, -2), 'MM')
+     AND iproc.statusproc NOT IN ('C', 'C2', 'F', 'S', 'S2')
+	  AND prc.codprc IN (30, 31)),
 estoque_operacao AS
  (SELECT esr.idiproc,
          esr.idrpa,
@@ -60,6 +66,7 @@ quantidade_perdida AS
    GROUP BY iat.idiproc, iat.idefx, iat.idiatv, apa.codprodpa, apa.controlepa),
 dados_producao AS
  (SELECT p.idiproc,
+         p.status,
          wcp.codwcp,
          wcp.nome AS nome_wcp,
          trunc(p.dhinst) AS dtprogramada,
@@ -80,11 +87,12 @@ dados_producao AS
    INNER JOIN tprefx efx ON efx.idefx = atv.idefx AND efx.idproc = atv.idproc
    INNER JOIN tpriatv iatv ON iatv.idiproc = p.idiproc AND iatv.idefx = efx.idefx
    INNER JOIN tprwcp wcp ON wcp.codwcp = iatv.codwcp
-   WHERE wcp.codwcp = 46),
+   WHERE wcp.codwcp = 31),
 resultado AS
  (SELECT dp.codwcp,
          dp.nome_wcp AS nome,
          dp.idiproc AS op,
+         dp.status,
          dp.dtprogramada AS dtprogramacao,
          dp.codprodpa AS codprod,
          dp.descproduto AS descriproduto,
@@ -121,6 +129,7 @@ SELECT rownum AS seq,
        r.codwcp,
        r.nome,
        r.op,
+       r.status,
        to_char(r.dtprogramacao, 'MM/DD/YYYY') AS dtprogramacao,
        r.codprod,
        r.descriproduto,
@@ -169,16 +178,32 @@ while ($row = oci_fetch_assoc($stmt)) {
     $qtdPerdida = (float)($row['QTDPerdida'] ?? $row['QTDPERDIDA'] ?? 0);
     $qtdOperacao = (float)($row['QTDOPERACAO'] ?? 0);
     $diferenca = (float)($row['DIFERENCA'] ?? 0);
+    $status = (string)($row['STATUS'] ?? "");
 
     // Regra visual para o painel:
     // finalizada quando não há diferença; em produção quando existe operação/produção apontada;
     // caso contrário, aguardando.
-    if ($diferenca <= 0) {
-        $status = 'CONCLUÍDA';
-    } elseif ($qtdApontada > 0 || $qtdOperacao > 0) {
-        $status = 'EM PRODUÇÃO';
+
+// A	Em andamento
+// AP	Aguardando programação
+// P	Em programação
+// P2	Programado
+// R	Criado
+
+
+
+
+
+    if ($status = 'A') {
+        $status = 'EM ANDAMENTO';
+    } elseif ($status = 'AP') {
+        $status = 'AGUARDANDO PROGRAMAÇÃO';
+    } elseif ($status = 'P') {
+        $status = 'EM PROGRAMAÇÃO';
+    } elseif ($status = 'P2') {
+        $status = 'PROGRAMADO';
     } else {
-        $status = 'AGUARDANDO';
+        $status = 'CRIADO';
     }
 
     $dt = $row['DTPROGRAMACAO'] ?? '';

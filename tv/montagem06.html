@@ -3,55 +3,491 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Haiala | PREPARAÇÃO</title>
+<title>Haiala | MONTAGEM 06</title>
 <style>
 *{box-sizing:border-box}
-html,body{margin:0;height:100%;font-family:Arial,Helvetica,sans-serif;background:#f2f4f7;color:#17202a}
-body{display:flex;flex-direction:column;min-height:100vh;overflow:hidden}
-header{background:#111820;color:#fff;display:grid;grid-template-columns:300px 1fr 300px;align-items:center;padding:10px 28px 8px;border-bottom:6px solid #d71920;gap:16px;min-height:112px}
-.logo-box{display:inline-flex;align-items:center;justify-content:center;background:#fff;padding:8px 12px;border-radius:6px;box-shadow:0 2px 8px rgba(0,0,0,.18);width:max-content;max-width:100%}
-.logo{height:66px;max-width:240px;object-fit:contain;display:block}
-.head-center{text-align:center;min-width:0} .head-center .kicker{font-size:17px;letter-spacing:2px;text-transform:uppercase;opacity:.72;line-height:1.1}
-.head-center h1{font-size:34px;line-height:1.05;margin:4px 0 0;font-weight:800} .head-center h1 span{color:#ff3138}
-.clock{text-align:right;display:flex;flex-direction:column;align-items:flex-end;justify-content:center;gap:2px} .clock .date{font-size:18px;font-weight:700;line-height:1.1}
-.clock .time{font-size:34px;font-weight:800;line-height:1} .refresh{font-size:12px;opacity:.78;line-height:1.1;margin-top:2px}
-main{flex:1;padding:22px 32px 14px;overflow:hidden;display:flex;flex-direction:column;gap:15px}
-.summary{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}
-.card{background:#fff;border:1px solid #dfe4ea;border-radius:10px;padding:12px 18px;box-shadow:0 2px 7px rgba(0,0,0,.05)} .card .label{font-size:15px;text-transform:uppercase;color:#68727d;font-weight:700} .card .value{font-size:30px;font-weight:800;margin-top:3px} .card.red{border-left:6px solid #d71920}
-.table-wrap{flex:1;background:#fff;border:1px solid #dfe4ea;border-radius:10px;overflow:hidden;box-shadow:0 2px 7px rgba(0,0,0,.05)}
-table{width:100%;border-collapse:collapse;table-layout:fixed} thead{background:#222b35;color:#fff} th{padding:14px 10px;font-size:17px;text-align:left;text-transform:uppercase;letter-spacing:.3px}
-td{padding:14px 10px;font-size:20px;border-bottom:1px solid #e7ebef;font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis} tbody tr:nth-child(even){background:#f7f8fa}
-.seq{width:6%;text-align:center} .op{width:15%} .produto{width:35%} .qtd{width:10%;text-align:right} .inicio{width:15%;text-align:center} .status{width:19%;text-align:center}
-.badge{display:inline-block;padding:7px 14px;border-radius:999px;font-size:16px;font-weight:800} .aguardando{background:#fff0c2;color:#775700} .producao{background:#d9f5e5;color:#0a6537} .atrasada{background:#ffe0e0;color:#a31616} .concluida{background:#e7ebef;color:#53606c}
-footer{height:7vh;min-height:52px;background:#111820;color:#fff;display:grid;grid-template-columns:1fr auto 1fr;align-items:center;padding:0 32px;font-size:16px}
-.foot-center{font-size:21px;font-weight:800;letter-spacing:1px} .foot-right{text-align:right;color:#aeb7c1} .home{color:#fff;text-decoration:none;font-weight:700}
-@media(max-width:1100px){header{grid-template-columns:220px 1fr 220px;padding:10px 20px 8px}.logo{height:58px;max-width:180px}.head-center h1{font-size:28px}.head-center .kicker{font-size:14px}.clock .date{font-size:15px}.clock .time{font-size:28px}td{font-size:17px;padding:11px 8px}}
+html,body{
+  margin:0;
+  width:100%;
+  height:100%;
+  font-family:Arial,Helvetica,sans-serif;
+  background:#f2f4f7;
+  color:#17202a;
+}
+body{
+  display:flex;
+  flex-direction:column;
+  min-height:100vh;
+  overflow:hidden;
+}
+
+/* ============================================================
+   CABEÇALHO
+   ============================================================ */
+header{
+  flex:0 0 auto;
+  background:#111820;
+  color:#fff;
+  display:grid;
+  grid-template-columns:minmax(180px,300px) minmax(0,1fr) minmax(180px,300px);
+  align-items:center;
+  padding:10px clamp(14px,2.5vw,28px) 8px;
+  border-bottom:6px solid #d71920;
+  gap:16px;
+  min-height:112px;
+}
+.logo-box{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  background:#fff;
+  padding:8px 12px;
+  border-radius:6px;
+  box-shadow:0 2px 8px rgba(0,0,0,.18);
+  width:max-content;
+  max-width:100%;
+}
+.logo{
+  height:66px;
+  max-width:240px;
+  width:auto;
+  object-fit:contain;
+  display:block;
+}
+.head-center{
+  text-align:center;
+  min-width:0;
+}
+.head-center .kicker{
+  font-size:17px;
+  letter-spacing:2px;
+  text-transform:uppercase;
+  opacity:.72;
+  line-height:1.1;
+}
+.head-center h1{
+  font-size:clamp(22px,2.4vw,34px);
+  line-height:1.05;
+  margin:4px 0 0;
+  font-weight:800;
+  overflow-wrap:anywhere;
+}
+.head-center h1 span{color:#ff3138}
+.clock{
+  text-align:right;
+  display:flex;
+  flex-direction:column;
+  align-items:flex-end;
+  justify-content:center;
+  gap:2px;
+}
+.clock .date{
+  font-size:18px;
+  font-weight:700;
+  line-height:1.1;
+}
+.clock .time{
+  font-size:34px;
+  font-weight:800;
+  line-height:1;
+}
+.refresh{
+  font-size:12px;
+  opacity:.78;
+  line-height:1.1;
+  margin-top:2px;
+}
+
+/* ============================================================
+   ÁREA PRINCIPAL
+   ============================================================ */
+main{
+  flex:1 1 auto;
+  min-height:0;
+  width:100%;
+  padding:clamp(12px,2vw,22px) clamp(12px,2.5vw,32px) 14px;
+  overflow:hidden;
+  display:flex;
+  flex-direction:column;
+  gap:15px;
+}
+
+/* ============================================================
+   CARDS DE RESUMO
+   ============================================================ */
+.summary{
+  flex:0 0 auto;
+  display:grid;
+  grid-template-columns:repeat(6,minmax(0,1fr));
+  gap:14px;
+}
+.card{
+  min-width:0;
+  background:#fff;
+  border:1px solid #dfe4ea;
+  border-radius:10px;
+  padding:12px 18px;
+  box-shadow:0 2px 7px rgba(0,0,0,.05);
+}
+.summary .card.card-blue{
+  background:#24256A !important;
+  border:1px solid #24256A !important;
+  color:#fff !important;
+  min-height:104px;
+  padding:16px 18px;
+  border-radius:12px;
+  box-shadow:0 3px 10px rgba(0,0,0,.16);
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+}
+.summary .card.card-orange{
+  background:#B85A12 !important;
+  border:1px solid #B85A12 !important;
+  color:#fff !important;
+  min-height:104px;
+  padding:16px 18px;
+  border-radius:12px;
+  box-shadow:0 3px 10px rgba(0,0,0,.16);
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+}
+.summary .card.card-blue .label,
+.summary .card.card-blue .value,
+.summary .card.card-orange .label,
+.summary .card.card-orange .value{
+  color:#fff !important;
+}
+.summary .card .label{
+  font-size:14px;
+  font-weight:700;
+  letter-spacing:.4px;
+  line-height:1.2;
+}
+.summary .card .value{
+  font-size:32px;
+  font-weight:800;
+  margin-top:5px;
+  line-height:1;
+}
+
+/* ============================================================
+   TABELA
+   - A rolagem vertical fica somente nesta área.
+   - O cabeçalho permanece fixo.
+   - min-width permite visualizar todas as colunas em telas estreitas.
+   ============================================================ */
+.table-wrap{
+  flex:1 1 auto;
+  min-height:0;
+  min-width:0;
+  background:#fff;
+  border:1px solid #dfe4ea;
+  border-radius:10px;
+  box-shadow:0 2px 7px rgba(0,0,0,.05);
+  overflow:hidden;
+  display:flex;
+  flex-direction:column;
+}
+.table-scroll{
+  flex:1 1 auto;
+  min-height:0;
+  min-width:0;
+  overflow-y:auto;
+  overflow-x:auto;
+  -webkit-overflow-scrolling:touch;
+  overscroll-behavior:contain;
+}
+table{
+  width:100%;
+  min-width:1050px;
+  border-collapse:separate;
+  border-spacing:0;
+  table-layout:fixed;
+}
+thead{
+  background:#222b35;
+  color:#fff;
+}
+thead th{
+  position:sticky;
+  top:0;
+  z-index:5;
+  background:#222b35;
+  padding:14px 10px;
+  font-size:17px;
+  text-align:left;
+  text-transform:uppercase;
+  letter-spacing:.3px;
+  white-space:nowrap;
+  border-bottom:1px solid #3b4652;
+}
+tbody td{
+  padding:14px 10px;
+  font-size:20px;
+  border-bottom:1px solid #e7ebef;
+  font-weight:600;
+  white-space:nowrap;
+  overflow:hidden;
+  text-overflow:ellipsis;
+}
+tbody tr:nth-child(even){background:#f7f8fa}
+tbody tr:hover{background:#eef2f6}
+
+.seq{width:6%;text-align:center}
+.op{width:12%;text-align:left}
+.produto{width:25%;text-align:left}
+.qtd{width:8.5%;text-align:right}
+.inicio{width:13%;text-align:center}
+.status{width:16%;text-align:center}
+
+.badge{
+  display:inline-block;
+  max-width:100%;
+  padding:7px 14px;
+  border-radius:999px;
+  font-size:16px;
+  font-weight:800;
+  overflow:hidden;
+  text-overflow:ellipsis;
+  vertical-align:middle;
+}
+.aguardando{background:#fff0c2;color:#775700}
+.producao{background:#d9f5e5;color:#0a6537}
+.atrasada{background:#ffe0e0;color:#a31616}
+.concluida{background:#e7ebef;color:#53606c}
+
+/* ============================================================
+   RODAPÉ
+   ============================================================ */
+footer{
+  flex:0 0 auto;
+  height:7vh;
+  min-height:52px;
+  background:#111820;
+  color:#fff;
+  display:grid;
+  grid-template-columns:1fr auto 1fr;
+  align-items:center;
+  padding:0 clamp(14px,2.5vw,32px);
+  font-size:16px;
+}
+.foot-center{
+  font-size:21px;
+  font-weight:800;
+  letter-spacing:1px;
+}
+.foot-right{
+  text-align:right;
+  color:#aeb7c1;
+}
+.home{
+  color:#fff;
+  text-decoration:none;
+  font-weight:700;
+}
+
+/* ============================================================
+   TABLET / NOTEBOOK / TELAS INTERMEDIÁRIAS
+   Faixa dedicada para evitar que o cabeçalho fique espremido.
+   ============================================================ */
+@media (min-width:701px) and (max-width:1100px){
+  header{
+    grid-template-columns:150px minmax(0,1fr) 150px;
+    min-height:96px;
+    padding:8px 16px 7px;
+    gap:10px;
+  }
+  .logo{height:52px;max-width:145px}
+  .head-center .kicker{font-size:12px;letter-spacing:1.5px}
+  .head-center h1{font-size:clamp(20px,2.7vw,28px);white-space:normal}
+  .clock .date{font-size:13px}
+  .clock .time{font-size:25px}
+  .refresh{font-size:10px}
+
+  main{
+    padding:14px 16px 10px;
+    gap:11px;
+  }
+  .summary{
+    grid-template-columns:repeat(3,minmax(0,1fr));
+    gap:10px;
+  }
+  .summary .card.card-blue,
+  .summary .card.card-orange{
+    min-height:82px;
+    padding:11px 13px;
+  }
+  .summary .card .label{font-size:12px}
+  .summary .card .value{font-size:25px}
+
+  .table-wrap{border-radius:8px}
+  .table-scroll{
+    overflow-y:auto;
+    overflow-x:auto;
+    scrollbar-gutter:stable;
+  }
+  table{min-width:1050px}
+  thead th{font-size:14px;padding:10px 7px}
+  tbody td{font-size:16px;padding:10px 7px}
+  .badge{font-size:14px;padding:6px 10px}
+
+  footer{
+    min-height:48px;
+    height:6vh;
+    padding:0 16px;
+    font-size:13px;
+  }
+  .foot-center{font-size:17px}
+  .foot-right{font-size:12px}
+}
+
+/* ============================================================
+   TABLET EM RETRATO / TELAS DE ATÉ 820px
+   Cabeçalho em duas linhas para ganhar espaço horizontal.
+   ============================================================ */
+@media (min-width:701px) and (max-width:820px){
+  header{
+    grid-template-columns:1fr 1fr;
+    grid-template-areas:
+      "logo clock"
+      "title title";
+    min-height:118px;
+    row-gap:5px;
+    padding:7px 12px 9px;
+  }
+  .logo-box{grid-area:logo;justify-self:start}
+  .head-center{grid-area:title;align-self:center}
+  .clock{grid-area:clock;justify-self:end}
+  .logo{height:44px;max-width:130px}
+  .head-center .kicker{font-size:11px}
+  .head-center h1{font-size:21px}
+  .clock .date{font-size:12px}
+  .clock .time{font-size:22px}
+  .refresh{font-size:9px}
+
+  main{padding:10px 12px 9px;gap:9px}
+  .summary{gap:8px}
+  .summary .card.card-blue,
+  .summary .card.card-orange{
+    min-height:74px;
+    padding:9px 11px;
+  }
+  .summary .card .label{font-size:10px}
+  .summary .card .value{font-size:22px}
+  thead th{font-size:13px;padding:9px 6px}
+  tbody td{font-size:15px;padding:9px 6px}
+
+  footer{height:auto;min-height:44px;padding:7px 12px}
+  .foot-center{font-size:15px}
+  .foot-right{font-size:10px}
+}
+
+/* ============================================================
+   SMARTPHONE
+   ============================================================ */
+@media (max-width:700px){
+  header{
+    grid-template-columns:1fr;
+    min-height:auto;
+    padding:9px 10px 10px;
+    gap:6px;
+    text-align:center;
+  }
+  .logo-box{margin:0 auto}
+  .logo{height:40px;max-width:140px}
+  .head-center{order:2}
+  .head-center .kicker{font-size:10px;letter-spacing:1px}
+  .head-center h1{font-size:18px;margin-top:3px}
+  .clock{order:3;align-items:center}
+  .clock .date{font-size:12px}
+  .clock .time{font-size:22px}
+  .refresh{font-size:9px}
+
+  main{padding:8px;gap:8px}
+  .summary{grid-template-columns:repeat(2,minmax(0,1fr));gap:7px}
+  .summary .card.card-blue,
+  .summary .card.card-orange{min-height:68px;padding:9px 10px}
+  .summary .card .label{font-size:10px}
+  .summary .card .value{font-size:21px;margin-top:4px}
+
+  .table-wrap{border-radius:7px}
+  .table-scroll{
+    overflow-y:auto;
+    overflow-x:auto;
+    scrollbar-gutter:stable;
+  }
+  table{min-width:1050px}
+  thead th{font-size:12px;padding:8px 6px}
+  tbody td{font-size:14px;padding:8px 6px}
+  .badge{font-size:12px;padding:5px 9px}
+
+  footer{
+    min-height:42px;
+    height:auto;
+    padding:7px 8px;
+    grid-template-columns:1fr auto 1fr;
+    gap:5px;
+    font-size:10px;
+  }
+  .foot-center{font-size:14px}
+  .foot-right{font-size:9px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+  .home{white-space:nowrap}
+}
+
+/* ============================================================
+   SMARTPHONES PEQUENOS
+   ============================================================ */
+@media (max-width:420px){
+  .head-center h1{font-size:16px}
+  .clock .time{font-size:20px}
+  .summary{grid-template-columns:1fr 1fr}
+  .summary .card .label{font-size:9px}
+  .summary .card .value{font-size:19px}
+  footer{grid-template-columns:1fr auto}
+  .foot-right{display:none}
+}
 </style>
 </head>
 <body>
 <header>
   <div class="logo-box"><img class="logo" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAMwAAAA6CAYAAAD86bb2AAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAACY9SURBVHhe7X0JmBxF2X8F/QA/9cMP9cNPMcfOHtnd6aqu7tndHCab7Bw5QBAwiAhGEpLt6p49k53ZzcGSSFBAUM4AIYGAAooooIRDQA5BQEATgRybEO5PDFf2yu4mO/V/3urp3ZmantnZK8S/+z7P+yTbXd31dk/9+j2rCqHRpJryL6BoYDyKzC5GkYpSFA3ORI3+AFoeDKHl/rkoEpiDGgJ+tGj+TGQFvipfPqpUX/4lFK1YgSL+36Mr5x4jnx6jMRoNGicA0TRrOooEz0IR/2oU9W9CkcAfUSSwHUX9b6JI4H0U8XegiP8QagxytCJk88oQR01zOFoe4gvWT+WPP+5tlm8+KtQUmowaQz9EUf/b6KKTOYoEXkKcj5ObjdEYDZ/qZ3wdRWfPRBF/NYoENqPGwNMo4n8DRf0xdMFcjlYDz7F51RwbFA5AmoI2A2iAl83hn1/h77ni17Qj9mY+j+3KvUzubsRoYfmxQpNF/DejpuA+ISvIBvJGAs+j5uaj5Ev+Ham8vPnTqhomGqkK6SQ8HWPjf+Q2h48WfMqnsmm6Wj1fVcLzZC5Tq+eXlladKF/1yREMorqKr6Go/1QUDVyCGgNbUMT/LloRtMEAg84ZeACEaCA7bghyVBuKVVw+vX3bM5PbY7s9vfydAs7/nvdjWYRhU70/H0WDDagp+JQAKcgL4HVkGQNMHynK+TMoth7TCOv10Squq1VcJ+EWVWE1ctvDQRgv+6xGzK0lWr0ti8Sl+nKuE7NSvu7wUjRwnPArIhXNKBp4CEX8HwowNMfBAYNNaAgXIGTDy0L86Ki/Z+3tvv0HX8nr4i25nL+ax/mbIwiYxnn5qCFgoKbgvSgSaBOgANlBblmeMcAI0pQlmkasfaU6DM4w14gluITW8BKtjqvYWCZfM9oEgKHEfMlHa/vkSWQAkkbMJfJ1o08NswtQ1L8INQbuQI2BvSga6EUXzrMHkwMQeaANliNBjupCvOCime2PPOZti7V4evmOXM5fybN5OIBpqjhBmFtNAXDgH0dNwff7QALaMBO4xwADpsRRGmG3l+rLYACmcAmt5hSb+yhddFiDMnEN84KP1qTIJOTS6rimWufL140+Nfif6wPIyjmDM6+yYTDB6gOHFl5f1vb+3/IP8BaPrVUcsMQBE3s5d50sWgrVhY5HkUAhagydjKL+C1Ek8ABqCrQIUIMWBN9JgNxFDjceAwwipOYLlJh7fLQ6ZVAC66rFwURTVXO+fO1o0pELmIh/14iDxOFlIf65Ff6u9b9RW2M7PAf5rgStkshvFPB/vlhwDTr35PGozq+gSGgaagzMR5HAeahBAGMjiga2oKj/ZRTxHxB+k+NHwb9D1YJjgEElJdYXKTHfBFDIg1IAhtiAodg4Q752NOkIBkzglVEBTF2IKxfP7HjuqeK22G5PjG93AYrDu3P51XfTfag+sB81+LtRFELQAVtbwKAGDeiAQ0TaXPobCo8BRkTGKDYfEgPQZWCCg60R1q17l06Wrx1N+vcBjPBXgr1nXju17YO/5Xf2OfYySJIA4+GX36XtB43UF37uC0G79DFSPCBgmo/C2PAqijFFLWYlMmNslun60i/JV6UjRak6UUtzL+pdOlUtrM6TrzkcRAj7lk6ruDw4IQAAvg3F7Eb5mtGmfw/ALA/yoxoCPWtu11p7t+f2uJpg4Ozv8nC+O4fzPZM4f20S5+9O4Bt+Rz5EVaGDAnDyfUeLBwDM3NyqYzTM/qKr4S6KzQ6ZdbXqgIrZ9+Xr0pFG2FofrXG9l4/WdFPMfiNfc7hIUwxLV8PvwUAs1eoF28/Nbiktrfovuf1o0///gFkW4setqOj65f24NdbiOcR3JIBke64NkNcn8tgreXzfn7x82z0+/ujN0/ndV83mP7/cz5/8VWmXubmkFS0PHoTsf8r9R4OzAQwxt8OPA19bmUXIVcn+R9NVdqkTupVZRKlU8yH5msNJvmL2dVU1zvaRqlpdZYs1xdLkNoeLjiTANKPmo8B0tf8aCcDUh3jO2lkdzz5Z1B5rSfBXACigQXZ6+M4HKd94cYiHv38mnz19CfepjBPF4t6iMB8/oZZff8F8Hntj4qF7H1b2566Z1YlqQ7Z5J/c1kpwdYP6e7keD4xSbi+Tr0pFG2I9KNMgrpN7L9iHY/fI1MoEJqCnhGSo2GMVsHcXsGg0bm3SV3UyxcSNVjMs0bFRTrzV1woSFx8rXu5GisP8uwVY+pdZXSyZbX4QMPwQDyrzVJ1Bq5sJxUQaVhhZAVl6pzdFV81SNGA1UYT+h2LiBquxmTTU2UWxeSxVrLSXsHLiffL0bjQRgphUs+rymMF1TzB8QhV2oKsZVGjFugncF/1Js/IwSFtGwNWdK0eLj5euBCKmcqHpZuaYZMyg1JwwfMHUhXnbpN9r2PD+5A3yRPn8FNMouD3/+rjK+7Pxv82kllTw3t5rn51VzpTgswKICY4t7cmv4lavmc74nh0OA4L2X8juXbijbP64h2CP8GrnPkeJ/EcBQumiCTiorNcLuoZi9qxGzC/oGswmus7lW/GsfE30cANl11WwcqMRFxWx5iVb3oUbY+9TmffAv/O2j1XD81wAK+TpKrak6Ca+h2Hxew+b7znNAUrFfpn657ACC9YFOwr+jinGKfL9EGipgdH3pcbrKFmiquYkq7DWNsHYfVAa4vCtHTo2YvRSbb1AS/hktZoXJ97KCVDHr4HemlJ0+DMDYJS4nXzWtff/WuHMPQHk1l/O9k/g7Tyh8pXm6AEVeHCTU5cGB4fxVq+fbIAPA7czlsV2eg797WGkrXjezHdWFYiKfkyLDMPkIB0xR0YKjVWxepKvht5zBZ5etONn41PvYbIk2IB/cV1etl1WFBRLvnUiUsAvLfJGU8hNRgqIJp/+PCxb0A4YQs1gj1v06sbrg/tCP3R7kkmXpZwhRQzt4jjh4NhcV1bl+2YcCGPgtdDX8KuSU7HdVncW7soMb9jVQPWDto5gZcD/Q5jqpLKXYqlexWa2qrGRogIkEACy951w/pbXz5byuPuceHPrXJvFHN0/nofLFQqNgb2ZhgVMAI4CXxyHJ+dHW/K6m23xt/7miogu02YiaaUc4YOJBh7+V6ctT2g+GBWhI+GOMjTmJ93dIxebq9Jn+WgDMw4mAUZVwAAZYumRnNiz8Nq0e3t/jYP4lSzQ0wIBpWqY3DAiQTNz/XEYD3BM+NKpaOV8jbLamWmcPHjDxsDHbOGV/bLunC7QBfzkOlt05/LbLAsLcmlzgnghzY1fAOAzapsXT+9LThe2nXTO1FS0LHgSfKUWuofARDpj+a1L7hwy8HTBwtEHmrzv0Swn7v9LS8CS5j8ECZsqUus9QYu5IBQzIZGuRfpkyDV6LQxAEfB3ZRxoKYFTVPNW9T7d3Jbfp53i7QxSbc4uKFh8PFdyiinvykv8dHGDiYKm9paQ1ttPTLcAinPs8ESK+9ZIALy6sEo68LEQmBsBcfYHtw6QApk/b5PLY9tyD9z6ktJVcOqMd1QcPDdu/+dcAzGz7Bw5zsMVtUwPksWAgt2qY/ZNi9r6G2SE4njqI+1kMTsI2yH0MFjBAFJs3CNNKVALUiEJN6Jti1kuJ+WFcrv0gO9wjHaDtgWxxqiz1J95/KIABX40S9g8HFNCvYy5SzDpBprhcB3wqaBL3ezv3p5j9VdeX/kdiH9kDJg6W+s2+1tjOnJ6ksPHeSfzBDTOE+TVYsAD3aZi3JnD++iQbOJCrgShbInAAmC0e3vVKXvfG+9S24osTgDMUU20AwOTmVh1DP2HAQASLEvZWmW85p8R6V1OMuzVi1erY/AalrFArXuJRCyvzfNigOmb1GjFfSwcae+AY+7XiKk9iH0MBDDjWZb5l9j0J2wYAotQ6C0LREHEDuXyKUSBMGcyu14jVlQ404tkxuyvx/kMBDBDF5m+nlEThg9KmYfYI+Ge6WhmEBDQ8NzD8n2LzXIqNp9O/K9BK8AGwpJKgbAATB8vyWwEsnp4+zQK8O4fvfYTwWdOW8MLJ2ZthiQxAm+9fxKNLz+Ab1oX4878q4/ueLrZBAwDaKRVsAlhbPLx9W17XxntpG/3xjPY+U20wwBkAMNlpGOss+bp0pKlm82ABA6Rh9kONWGs1LXmgu5GqVudpxNzpPhCgLL6Wqwozk64ZAmAApBSzn6sKW1BUZH4u8ZwbUWwZOqk6BANR7gO+9hD98/nY1532QwUMIew8ndZcA+Fk+ZxMIDfF1v2gHeX7233Uw9SGTclXDQgYEQ3rrRdmmKRZQAPs9IiwMTj4ukun2bCumiKKlptbI0AHkbXQrMW8yTiD37e+nH/0bLGdz2nJSdY4O/LAv4l1b8vrvmsLbg1eMa1tXCRwUAQHsomqDRMw9hfbvAWSl5piLsnEdhv2gPtAzgyYwZKmGLX2/VIHpzDLFPOmxPZDAcxQiGL2Z/cPhu33gM/gtB0qYAZLUKqkE6vbTfuJDyJhL5YnfRAyAQa+1rXB3vCmkv3CZ0kES9wUe/bOMqEhSBbRsGyYYlMABkw7ABD4RKB9rr5gHn/7SUX0mTSXxtE4uz089qqn5+nHi9vP31DW8T/NsztRXTCW0VwbADADmWTAtg1uR1YyMbRx+1EcHipgwMaGBKMwORRjBiEsRBXzMsc3SOkHAEDMR8uRk7lGSPWOPGAgaQiJPpE4JGy2kAubz6V7l3GfQYRzgUYJMOMgIgemIiR2IdoHfdplTqm/TdyEfV8vqh7ff4tMgKkNxRbfWAal+V18pwQW0C67PLyx8nSel+v+UCPBAB4ADfQRmLmY33qZnx+E/iGiliiPkCmPQ4g7tstz6K2/FBy45m7aOv0n3+j8VMTfLbTO8mAyeAYAzEAaxubU2YDpWb62n7MGzIIFn9KwWUaxVaUq7NcaNrZSbO6lhH0AVcX9MqX2AQzgVbG5NdGMGgkNAw63ho2TKTEuhrwNxWy7htk7lJitFJuHMskk+gHNg9kF/fcbGcBAIpKQ8A80bG7SCHuBErY77vh3wnTsTHKJYARmvbo3nFCpnQ4wdaHYd9ZPbet5NSEalsi7PPy9pxRR5uItTkXnaHBRYRUvyK/mtect4PueLbKDA7JcwPHkJ/g5se2e7j8/UdTReGtJW+HF5Z2oIdBjm2wwp2beCABmZHggwOj60v+EKbkUsycpNg/C1F07MmVHp5zI0EAhUxHJUthOmDjm3Hs4gMH4/HyqWpdqJLwTkqoQAndkSpYrvUyiHxswfbNuhwsYqCSAAICGzY/sd2VHzOR3lUku+5zFIaTcf2c3wNSF+PyrprW3b8t1Bwvwa5P4Y5unCw0AeRe5s9FiUUqTU8vPPf0c/k/wbWS/RmYRWcvlsZ2e3u5teV0P/sHbUXNzSVvOD2cdQCvm9KK64BEPGKhlosR61p5jnz5Emw0LHwqzXSMAmHGaai5zKpxt32zo48AGjHmJc/OhAqa4eIlHI+avRVhZVDkMLRAF7ADGh6tofw8yYOpCfNpl32j7cGv+AdfyfIffmMg3XxLk+flizndKZ6PNOTk1QtP0gCyyT+PGoHXiYWkw2fb/Nb/ngT/ibnNT6eMw7yXxpTt0uAFDcSpgNMU4W1fDrbaznH5A2l9Le06LPXhT2wCPBGAgcQlZdaf8RL6mn50SHTvnkWnwjgRgNM2CxTx22CvNZHpXdpChXy73tgMDpj7EoXbr7RcLOsXce3nQJfJbE/g1F8wVA1fu6HCwqpjCPLvrytl2IECWLxMDeCBIsCufG5vKHkPoV/LXU1A2gOkfpANzJs3gpmE0bFRoxOpM17+TNLTPs5hGzPc0bL5KCduRzm9IDxixCksKuwGGKuzKUl3UqKW0F3I5SUM7XHyAEvMNDZtb7cJR92uGCxi9aOl4TTV32u8xtT1wH0BABsw+0oi5K55D6hDHUp7DAYzhAphlIX7iBbMP7Hy20K46lgeZzG9O5DesncM9Hgi9pQp3OBgA851vnsvbX5ps+yyyjOl4Rx7v3e7pgRU3Uc2c58CR7n8h/TQwYCx49j0Um09DBCgTq9h8hhLzXcjYp94nFTB2joD91T0M269RKDaf1IhhKYoxA2Mrf0pR3fHUyzDF7GO3L3p6wGSnYTRszNGJ4yulto+Dt41imG5gnUG9S326Xj1eRM0IW5nOdBsuYKhi3AS1aXI7m+0PCyXmdhUbzVQx/T5seL3exSfA5DiKzRfd+kmvYSJz+BdXzu569onitgE1i8OvT+L3XDuLFxeGIeqS0tnhYNAyEM5+4a4yO08jy+jGkLvZ6TlYt9nXiqLg9Pv/MlQfBo6r8R8NJhil4/7BZl6SDgAyYFTFONvuN3VwxZ3Vbk21anQkl27YE8HgCzqSgHFqvShm96QbmPa9wy/D1O0kgeJESbhuNABjV0+zNigdktvZZqEojblR1+tdp5NTbD3v1o87YJYFtn+mMdC75WEFZkrGUgZYOm7J4XsfVvm00kquFKe+gMPFeXk1/M6fVmQHmO0i0Xno0l/SVlFSs2p4YeX48R/I16UjnbB12QJGI+bmdOaFyNYTY33y3fupFIcnjQJgYDLV1yB87bbCTDw61wlmZJIwCQRBgtEADCVmON27EpoFm38qKmo+OkmYBIJp6G79uALmmOX+bTfdo3bFdnliroWP6Tie5a9fNLws/3AZzLJrL5znXumcyK/aVQG33Ke2ouWBQyIfM0AeZqDEZfzHGPFaMpgHYw+WVIc67jfEKO3PisskaswIa3czm4YGGHvqNKy3bH/FUwe8eEeYvSJXHSeSio3Vbs8k+hkCYJx3D7VqmQADJUlJgkikYeMVt35cARO9reTp2N6cg3yPx442ZRp0Mu/J4dvu9fFSjfHiIRRdjgQDYNavmZsZMHGw3Peg0nY0JDEhBzMCicvRA4z5OQ2z19N/yc2YhsNpv+TUy87z0eqY+8AeDmDYt9JpCBsw5tYkQSSC0qD0dVtDBwwkcN3va/suKmZNSYIkkKZZikZMUVUtX+8KmPx1M1/8wYYpPXdvwW0fvJTXDTMdhR8D5SbpBmDCQART6LZLA7wgv4or3tROR5vz82r43VfPzmyStXj4E4962/6ryX9AZPtHKNM/WoDB+JzPUmKkXY0yPgh+KN8fiBRUTtSw21wV59qhAwYy+ekAY/sJ1scQcEgSKE4qZos1UtXjdq3oZxiA0Yh5pztg4vclbEuSMHEqL194rEbMe9Nd6woY8GHQsrkczJQT1846YGwsbf39w0rHgW15ByDZJ3IxmRbhiy+bdN2aubyoMMyLhlixPBQGpx8Spy/dXZoeMC25/MWnCttPWD37QMpqNEcoYCBIQLH5WLq2wjdRrQ9osXEu/OhwzZQp3/4MIeGTNGxtTSevLTOUxrAWmDbgyJUtYOytMMy05SRwb4jaqWplX2ZcUc4/EUpewL9x86n6+hkOYEQwxd0kE4NeDccoYWthgQ9oD+8Xyos0bPzevr/787gDxgkrg00PFb52pW/P5HUzOxtv9bU990RRB5SXCK0DoVs3rQPHd+fwe64pF6UyUDR5OAIBhQVV/PR5C/n+vxTaUwBkuVo8/NWnCzsmXjjrgOtksyMUMPG2a0vS5EaA+wYf5DeI+STkE8BUSyerw2LZV2LugZmETl8DA8Z2+uOh7pfdZoD2319otg8pYX8W4XZivAnH3EyepH5sTfATR6ZsANPn9FPjFNt8dR9zTghew0YLJcZTcF/w8dJplr7r4jNIKbV8jlypmX5gAA+YLnUh/umov7v88ukdG+6hbe+9VNAZ2xXXOjJwIAiwdxJ//RHCV1mnCb8GggHg24AWkIUZNmNT3P9nK09yT1y2ePhrzxV0TL5oZkfaKc1HMGDiC020QZWz3NZh+DFhMIIcyYPSzrDL7e1rYOCwtxJDrNkApjn+jiCXYsua/jdNTub2m3DxcHhKe9GP/V6ucmQaDGDAhNWw8VeQVW7Xz4nvKjmJnO5d2e/RgvUQpjtyuQNGBg98neuDsfFrZnXW3VLa9renCjv6FheXzTVwvls8fOu9Pr6u/hQ+Z9bivlJ9mOsCUwEAQMMtp4H8z8ypS/kbjxDRXzJYcvnbLxS0k4tntqcFyxEIGLk0RlPY2oHKPGSOh3dBrg/cBrU4j80PvWWLT3D6yQYwTi6paMri4ylm29KZQOnYzvqbnRox293kEl/7hMlagwEMkE8xToFncwuUpOd4jobAu5LPOefhfbKQ08/AgElkiC7VhWLHNFb0nHndlPZHHy1uj8GSsDBgE4ETDwYAeN5/pphv2TCDr1t2Cv/ON7/Pp5UYItkIi2TAGmXAEOnCgzDhAGx5udX8xh/OSfVdWnL5Oy/mt2swCxPMS/kZBgsYzF5O96ONNmDKJyw8VsPmbXAuk/2fKI+Yd0PMVTq26t0GdXwAdPsUluP0MzBgjD8klsaATa8R63W7nCbz7wb9xf2Nt1UFFvpjj7i9T/EuCbvH6QMAA5O33NoKuSTAAKnYaHS0iNxeZnhPYlklzG4XFQmYHUzVNE7SM3FW7WAA4zBonfoQrKN8ENYl+8MjSpuYYCYvPA5rlME0YzCZdufw9hcK+Z6HKP/j5mn8ugvn8tXWabxq4Zn8vG+fzf0zzs/adANttWjB2bxza4F9/wSw/OOlgo6SbMACnA1giLkHljnqNzH6GY7TQWwbp2F2xRRfQ8p9gKf4IpAveEy+RqyuT9hanVR9DGCz2ydOToMFKOA4ADHcQr2GADAsQAeDqv8am+GYPaDYbKcPiLhNLWlKkUnIpTfAQH5KrlZWlCWKRiwxgzStXGKRjDAMuN9TakfPICELc+7lfmALPqiDcwphRWidmK/CcbmtkMt+XyxRJiBVMRZqanivLZNdHJookyj1Fx+t8D6dmGvsfT2rvkwx+wA+Gsn91NqLsRNjVX8PQwGMw3HgoIbAwW9ePa3tT49722I7PIdcfRwxR8VZhDynD0Tg+xzc6RG5FDDZBjLVoDp6XsUi/tqjJHk+TFyz+H48oyMrsAAPABgRTSHmEg2HV2uKuSKFcXi1WtwfERqI7LWtqt3vpVZdQDH7jnyNQxCu1Un4YnCmVWzCJKh3NMJeF84+ZveAnEVFC7/itFfV874spkeTKktTwmY/Wxb1hsOJS7ZSr+UrUWuqk9vZrOOqKorZN90SknaCtfI0SsxfqNjYBlpHTBrDbDclxvOUmNeq3sogrE3sXKPhJWUltLYqpR8SDtNi89wFC+xCWBjIuhJeAP3LbR251KLKoiSB4gQVCaBhVWLBIhg7NWy+DQuJAAA1Yj2i43CjohgFTnuYtaoR80y3vuAYLDjSf/fhAMbhOHD+I+rvXnxjaevu5wo6U7blc2NRcp/L+VsTxXpmAwEGzLfgzPP5tvt8yY7+bg/f+/zkdvVHsIpMlmABHgAwRyY1HwUrMpaRyomw5jFMLJNbfBI05cS6z4A8sBYxyCdrpE+KxA5r1JwA9XUjswvBSADGYbG6TCgGOY+f3kVbe2BVTNlMc+O9k/gtPw6mBQxMUIOq6DPmL+Tbt2jJYGnJ5TufndxetK68A9XNSZUpE/9LAmaMPlkaScA4DAnCumDvjEu/0Q6LUsCErYzl93sn8ZtdAAOzKyEgAFOgV7DT+XvPFPeDJV7u8sJTRe2eNeWdg9IsDo8BZowGTaMBGIfrQ/zYqL97xW2+1rZt+V2uG8JKGgay97DkEgAFEpNnnXIuf+CmGbb/40xHjoPl4Ue9rV+GDL5bUjIbHgPMGA2aRhMwwHEzDcK8f3xMaJtU3+b1SXzDRXP4175eL/wU2Bpj6dnf5fetn2lPDgOt4qyCCfNZdnl6b/0daftck78rpdxlMDwGmDEaNI02YByuD/Fjov7uC3+h7+96JdcutXEAszuHP7BhBo9WniEKOXeAnxLXPEklL7Aw+Q5Pz4/u1OydyrJZrC8TjwFmjAZNhwswwHatWu/sy6e3v/JMYdJuZb2wAwCA4/WJfeHmJC3Ukss7/p7XVbmhFFbwt+ezyPcfLI8BZowGTYcTMA7Xh/gXVlYcuP63amtsR+5Bu6gTymxcAgPg87R4+FsvFHSGrpjeJjZXGgmwAI8BZowGTaMJGNgyHLYOh/sDrwhxtDLOcDwSiH3vxrL2d/6W2+26pBNMKd7liT35eHHbJIiEZZuQzJazAIyqVhXBNGRVMb8LGWH5vENUMWeK1ShV89R0yzbB6iNwL4rD35kcLzVPJKiKtc8bZ8B+kLBnJCxpJLeD5VedzLkbQW4G5KWkMgx5Efl8OoJkHmwaBDLA0q7pnsONIN+Bk1ZXSSZYyjbTeUqX+jA+v2/vGrU4TKZNa/h8ciuRlCyFnas11VoI/5fPQ34Kdg+Qj8sE7xoKXOXjDsF7V5XK72rEspLf4UgBBsAB9wEwXDCXo+Z5HK2eYx+L+A+hqL8dRfwfoYj/zXHLg7uOCc/78JjKkz5CPzjlY1I7753tj+IPk0AT37bv+t+orZ+H3ceGGgnLxFkABhZPoJj9lIqtJNgdJSVmXza9rw0xwxRbN1PCzoPpstAepewJycfBRCedGGuo14rCyvfyRqQAOg2z5aL8HDYwVYyFUFOV2AbmpsP8FI2Y98E9E88BQdYa1lamxFgDG8cSYqpym3SkquzHKjHvUFVWgzHs55j+vcgEGXwVs5/Lxx2CWZGUsEedTL5MsMqMSswnnbn3KjY3yZPRoGJaI+bdlLCfEGLVqiorTzwPRL1WFVWsC+XjiSTKjbD5OMXsV9zlHcJzU8wuhU13RaVH0m7SQwUMAAQ0Bgw6AAYAJRLoRZHAbhT1P4ii/ptQxL8aNfi/hxoC5aip3Isi5SeiutDxk8sXTiEq69Co2V1UHO5RtMr2Vx9QW8U06bi/8vG2vK7KjeCvBA4N27lPxxfOg39fzgQYVTHWO19GWHoUluhJPC8Wtibmg84MxvLy8k9r2NySXOEK1HyUjtktsH4W/EUx2wJL/SS3sUkjbCOlNX2bkyaSqrJpsEOxpli3upWGgHaB6mKdhFO+vgMRDETNa54pH8+GMgEG6s5UhV0P6xsnl5n0E1XYWpWwZ3RsiQXJVdXaqCmWktjGnlhn/TLTTszUa4YHAoymVE1RVeMG+D3kPoDsolvzDySprN+hwQAG2q2aY2sQ+DcSeB9FKp5BEf91qCFwLmoM6aipAsrGXVDbT9Nzqsdrivm+j1TzfE8Nv2rF3I7YnkkxETLendO77enC9imXzGiHnQNGzF9xOPEZVoZ6UIMfSsrTygs/NBTfwRRbVTHviG/B3UdQZwUDIekYYT8CTZF4DEgjUBkrvlzXaNhcDbVYchsgKFBMN+Bh9iIh7CRVMc6HDZTk80DxquAHxGZC+tLj5PPpiCrGxVQxH1KxeYmmGmfL5zMRbJ6qEnarfBxIU1gNbGAkzESl0nUwU4X9iGLjLNixGWZ2wmKBLoN5HJynuPIXsL26G/igVk7DmRe9oIq5Siu2TtYIW6piY5l8Hoh42bdUeIdKpfQOBwIM+Bor53DUPBf+jqGIfxeKBDaiyOyzUVNFEWpGab/O6UhUhxJzh7eojs+rOK/z4+cLD/DXc8R6YTffR1qPX1lxYEiZezcG+VfEQQJmYjTQgyKBragxuA4t909FzeV92z64keo1bgBzgRBzSeKGP/3nrSCo9sRjFBvXUlIpVTHzcTpmP9eIUQsDkiqJFbDJlA4w9io27EGKDTATb1eJea+bWQZUUmR+RVXMq0BryOfSkaaal6jYXAa1V1C8KZ/PROCfgZkpH4dBTjH7DcXsForZBph6nboNnl3JLbbGwNbJoKlUzK6WfYy4SXanRthJGIcnTStI9XHigFktH++jBb/6FGhgDT6EorTf+K0zOU4mr7f6BPvjZlzRfzQdYMDcApDY57ajSOAKFKmYhxqmpQg5WIIfnmDzmaLJ9fz362e08f8bzz/Ymt+5aENZm9hJbDjJSMeXAjMRAALPEfG3o2jgaRQNrEXRYAWqmnuMLFM6UhW2MdOW3TA3XiPmFtA0MH8F9h2x1bnsbDcfpSnsDjDhwASk2HgIqmqT29ikY/bLEq81VT4Oq05qxLhTUapOhEFNCdsC/SW2Afsctp6ACmFdqTyVYvbLTBo0kXRi/gymK8Bz2MEG94Ek0bgJ8NygHbB5m3xS04wpABhRlAnLuSrmr1XFmCe3owq7zjF3KTFugnUHZNPLrh5n91BqTYW1DKDgM/E8EGgzjZiXg1awNUOyLwmbNsE7hHcPQQaYg0TpUuldL/gUvEPbBGSnx99hnBIBA19jGGjgl0QD/0SRwGbUOPuUkQCJTBMn1dxvnHUOj+2Z1PWnJ4o6lHUzoSx/cCFjof3Aj4qbWPCvAEjgAIoEXrA1YWAJaphdgJqLXM2fgYgqLAK7VMnHEwm0gfiCCjPC3CT7OTY1H6VidgHsVwJ/gbmUziGHdbRK1aoU/wQcUFU1v933NzYZRNwS28B0XdggSVOM9ZpqbkodDOkJNheCLzjF5k9VHG4scPmCy2RrPWOVpph3E1I5Sz4PUbfESXbEa37PbQ4R7JqmqqwE/g/7scAghSVmU9qBdsbmLZSwK+UJZEC6WnkqVY3f2s9gXiRHNimxztMV87vO35rCloK5mNhG7BKtGKtUYq5XCduoFrNp/WcBME5kyx5sL6KmwDIULc86HDkUml1q/PyJO2bwNXeTQ0fDwI/G+3fCzg6DKQUsgBwHs8N2aPofKBJ4CUX896Ko/yIU9Z+BIoHCkQK5iNpkUaoOA0dVK/MyldtDG6fsHcwS+FtuAySOu5gJqffm49zCzmKxCmrmZrP3ZCKBTLBDF5hz8G92GoaP0/Wl450VWWRK1VTNR7nLvODoxCkBIIubqQTaD77+IGPiUlF958ubPw1aH3ZlA7DI0wzifSdo3HTymJ+jRW7vMOJ/E60MHkLR4P0oWnEaWnpy2h98JKlp1dy6+T+bvgfVB99GDcF/CI0WDeyz2f8eivjfFbJF/LtRg/9lFAk8gaKBu1A0cCWKBCOoIfBdFA3ORI2hXNR8eGQeozFCKBJch1ZUpDiYo04cjUPBcz6L6su/hJbP/wqKzD0RRQPjUX3o66gh8FXUNPfLKBo4DjW7R5LGaIw+Cfp/YkptvBgqT8EAAAAASUVORK5CYII=" alt="Haiala"></div>
-  <div class="head-center"><div class="kicker">Programação de Produção</div><h1>Centro: <span>PREPARAÇÃO</span></h1></div>
+  <div class="head-center"><div class="kicker">Programação de Produção</div><h1>Centro: <span>MONTAGEM 01 (PORTAS)</span></h1></div>
   <div class="clock"><div class="date" id="dataAtual">--/--/----</div><div class="time" id="horaAtual">--:--:--</div><div class="refresh">Atualização automática: 60 s</div></div>
 </header>
 
 <main>
+  
   <section class="summary">
-    <div class="card red"><div class="label">OPs na fila</div><div class="value" id="totalOps">0</div></div>
-    <div class="card"><div class="label">Em produção</div><div class="value" id="emProducao">0</div></div>
-    <div class="card"><div class="label">Quantidade programada</div><div class="value" id="quantidadeTotal">0</div></div>
-    <div class="card"><div class="label">Fonte</div><div class="value" style="font-size:24px">Sankhya / Oracle</div></div>
+    <div class="card card-blue"><div class="label">OPs na fila</div><div class="value" id="totalOps">0</div></div>
+    <div class="card card-blue"><div class="label">Em produção</div><div class="value" id="emProducao">0</div></div>
+    <div class="card card-blue"><div class="label">Quantidade programada</div><div class="value" id="quantidadeTotal">0</div></div>
+    <div class="card card-orange"><div class="label">Qte Prod Dia</div><div class="value" id="qteProdDia">0</div></div>
+    <div class="card card-orange"><div class="label">Qde Perda</div><div class="value" id="qdePerda">0</div></div>
+    <div class="card card-orange"><div class="label">Eficiência</div><div class="value" id="eficienciaCard">0,0%</div></div>
   </section>
 
   <section class="table-wrap">
+    <div class="table-scroll">
     <table>
       <thead>
-        <tr><th class="seq">Seq.</th><th class="op">Ordem</th><th class="produto">Produto / Descrição</th><th class="qtd">Qtd.</th><th class="inicio">Programação</th><th class="status">Status</th></tr>
+        <tr><th class="seq">Seq.</th><th class="op">Ordem</th>
+            <th class="inicio">Programação</th>
+            <th class="produto">Produto / Descrição</th>
+            <th class="qtd">Qtd Pçs Ordens.</th>
+            <th class="qtd">Qtd Operação.</th>
+            <th class="qtd">Qtd Apontada.</th>
+            <th class="qtd">Qtd Perdida.</th>
+            <th class="qtd">Qtd Diferença.</th>
+            <th class="status">Status</th>
+        </tr>
       </thead>
       <tbody id="opTable">
-        <tr><td colspan="6" style="text-align:center;padding:28px;color:#68727d">Aguardando dados do Sankhya / Oracle...</td></tr>
+        <tr><td colspan="10" style="text-align:center;padding:28px;color:#68727d">Aguardando dados do Sankhya / Oracle...</td></tr>
       </tbody>
     </table>
+    </div>
   </section>
 
   <!--
@@ -64,10 +500,22 @@ footer{height:7vh;min-height:52px;background:#111820;color:#fff;display:grid;gri
       /tv/api/ordens-centro.php
 
   Este HTML chama o endpoint com o parâmetro:
-      centro=PREPARACAO
+      centro=FINALIZACAO01
 
   O PHP possui uma área específica para mapear cada Centro de Trabalho
   para sua respectiva query/filtro no Oracle/Sankhya.
+
+  O endpoint também pode retornar o bloco "resumo" com:
+      qte_prod_dia
+      qde_perda
+      tp_disponivel
+      tp_performance
+
+  A eficiência é calculada no HTML como:
+      (tp_performance / tp_disponivel) x 100
+
+  Regra de negócio:
+  Tp Performance = soma do tempo de ciclo de cada peça individual confirmada.
 
   Nunca colocar usuário/senha do Oracle dentro deste HTML.
   ================================================================
@@ -77,11 +525,11 @@ footer{height:7vh;min-height:52px;background:#111820;color:#fff;display:grid;gri
 <footer>
   <div><a class="home" href="index.html">← Centros de Trabalho</a></div>
   <div class="foot-center">HAIALA</div>
-  <div class="foot-right">PREPARAÇÃO</div>
+  <div class="foot-right">MONTAGEM 01 (PORTAS)</div>
 </footer>
 
 <script>
-const CENTRO = "PREPARACAO";
+const CENTRO = "FINALIZACAO01";
 
 function atualizaRelogio(){
   const d=new Date();
@@ -92,7 +540,7 @@ atualizaRelogio(); setInterval(atualizaRelogio,1000);
 
 function classeStatus(status){
   const s=String(status||'').toUpperCase();
-  if(s.includes('PRODU')) return 'producao';
+  if(s.includes('EM ANDAMENTO')) return 'producao';
   if(s.includes('CONCLU')) return 'concluida';
   if(s.includes('ATRAS')) return 'atrasada';
   return 'aguardando';
@@ -104,7 +552,7 @@ function renderizarOPs(dados){
   let emProducao=0, quantidadeTotal=0;
 
   if(!Array.isArray(dados) || dados.length===0){
-    tbody.innerHTML='<tr><td colspan="6" style="text-align:center;padding:28px;color:#68727d">Nenhuma OP encontrada para este centro.</td></tr>';
+    tbody.innerHTML='<tr><td colspan="10" style="text-align:center;padding:28px;color:#68727d">Nenhuma OP encontrada para este centro.</td></tr>';
     document.getElementById('totalOps').textContent='0';
     document.getElementById('emProducao').textContent='0';
     document.getElementById('quantidadeTotal').textContent='0';
@@ -113,16 +561,20 @@ function renderizarOPs(dados){
 
   dados.forEach((item,i)=>{
     const status=item.status||'AGUARDANDO';
-    if(String(status).toUpperCase().includes('PRODU')) emProducao++;
+    if(String(status).toUpperCase().includes('EM ANDAMENTO')) emProducao++;
     quantidadeTotal += Number(item.quantidade||0);
 
     const tr=document.createElement('tr');
     tr.innerHTML=`
       <td class="seq">${String(item.sequencia ?? (i+1)).padStart(2,'0')}</td>
       <td>${item.ordem ?? ''}</td>
+      <td class="inicio">${item.programacao ?? ''}</td>
       <td>${item.produto ?? ''}</td>
       <td class="qtd">${Number(item.quantidade||0).toLocaleString('pt-BR')}</td>
-      <td class="inicio">${item.programacao ?? ''}</td>
+      <td class="qtd">${Number(item.qtdoperacao||0).toLocaleString('pt-BR')}</td>
+      <td class="qtd">${Number(item.qtdapontada||0).toLocaleString('pt-BR')}</td>
+      <td class="qtd">${Number(item.qtdperdida||0).toLocaleString('pt-BR')}</td>
+      <td class="qtd">${Number(item.diferenca||0).toLocaleString('pt-BR')}</td>
       <td class="status"><span class="badge ${classeStatus(status)}">${status}</span></td>`;
     tbody.appendChild(tr);
   });
@@ -132,13 +584,35 @@ function renderizarOPs(dados){
   document.getElementById('quantidadeTotal').textContent=quantidadeTotal.toLocaleString('pt-BR');
 }
 
+
+
+function atualizarIndicadoresResumo(resumo){
+  if(!resumo || typeof resumo !== 'object') return;
+
+  const qteProdDia = Number(resumo.qte_prod_dia ?? resumo.qtd_pecas_dia ?? 0);
+  const qdePerda = Number(resumo.qde_perda ?? 0);
+  const tpDisponivel = Number(resumo.tp_disponivel ?? 0);
+  const tpPerformance = Number(resumo.tp_performance ?? 0);
+
+  document.getElementById('qteProdDia').textContent = qteProdDia.toLocaleString('pt-BR');
+  document.getElementById('qdePerda').textContent = qdePerda.toLocaleString('pt-BR');
+
+  const eficiencia = tpDisponivel > 0
+    ? (tpPerformance / tpDisponivel) * 100
+    : Number(resumo.eficiencia ?? 0);
+
+  document.getElementById('eficienciaCard').textContent =
+    eficiencia.toLocaleString('pt-BR', {minimumFractionDigits: 1, maximumFractionDigits: 1}) + '%';
+}
+
 async function carregarOPs(){
   try{
-    const r=await fetch(`api/ordens-centro.php?centro=${encodeURIComponent(CENTRO)}`,{cache:'no-store'});
+    const r=await fetch(`api/montagem06.php?centro=${encodeURIComponent(CENTRO)}`,{cache:'no-store'});
     if(!r.ok) throw new Error(`HTTP ${r.status}`);
     const resposta=await r.json();
     if(resposta && resposta.sucesso===true && Array.isArray(resposta.dados)){
       renderizarOPs(resposta.dados);
+      if(resposta.resumo) atualizarIndicadoresResumo(resposta.resumo);
     } else {
       console.warn('Resposta inválida:',resposta);
     }
